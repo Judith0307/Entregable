@@ -213,10 +213,13 @@ if (encontrada == null) {
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
         arbol = new ArbolBST();
-cargarArbolInicial();
-jTextField2.setText("");
-jTextField1.setText("");
-txtrecorrido.setText("");
+        
+        // 2. Limpiamos las cajas de texto de la interfaz
+        jTextField2.setText(""); // Limpia la caja del Título
+        jTextField1.setText(""); // Limpia la caja del Género
+        txtrecorrido.setText(""); // Limpia el campo de texto de los Recorridos
+
+        dibujarArbol();
     }//GEN-LAST:event_btnLimpiarActionPerformed
 // Muestra el recorrido en txtrecorrido
 private void mostrarRecorrido(String tipo) {
