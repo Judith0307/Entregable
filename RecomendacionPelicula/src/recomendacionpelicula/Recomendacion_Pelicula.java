@@ -26,18 +26,73 @@ public class Recomendacion_Pelicula extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jRadioButtonMenuItem1 = new javax.swing.JRadioButtonMenuItem();
+        jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        btnCatalogo = new javax.swing.JButton();
+        btnModelo = new javax.swing.JButton();
+        btnRecomendacion = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        btnArbolBianrio1 = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 683, Short.MAX_VALUE)
+        jRadioButtonMenuItem1.setSelected(true);
+        jRadioButtonMenuItem1.setText("jRadioButtonMenuItem1");
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 101, -1, -1));
+
+        jPanel2.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnCatalogo.setBackground(new java.awt.Color(204, 0, 0));
+        btnCatalogo.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnCatalogo.setForeground(new java.awt.Color(255, 255, 255));
+        btnCatalogo.setText("Catalogo");
+        jPanel2.add(btnCatalogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 170, 180, 50));
+
+        btnModelo.setBackground(new java.awt.Color(204, 0, 0));
+        btnModelo.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnModelo.setForeground(new java.awt.Color(255, 255, 255));
+        btnModelo.setText("Modelo IA");
+        jPanel2.add(btnModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 270, 180, 50));
+
+        btnRecomendacion.setBackground(new java.awt.Color(204, 0, 0));
+        btnRecomendacion.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnRecomendacion.setForeground(new java.awt.Color(255, 255, 255));
+        btnRecomendacion.setText("Recomendaciones");
+        jPanel2.add(btnRecomendacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 180, 50));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 30)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(245, 245, 240));
+        jLabel1.setText("StreamFlix");
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 190, 50));
+
+        btnArbolBianrio1.setBackground(new java.awt.Color(204, 0, 0));
+        btnArbolBianrio1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnArbolBianrio1.setForeground(new java.awt.Color(255, 255, 255));
+        btnArbolBianrio1.setText("Arbol Binario");
+        jPanel2.add(btnArbolBianrio1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 220, 180, 50));
+
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 180, 520));
+
+        jPanel3.setBackground(new java.awt.Color(27, 25, 25));
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 870, Short.MAX_VALUE)
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 460, Short.MAX_VALUE)
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 520, Short.MAX_VALUE)
         );
+
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 0, 870, 520));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -78,5 +133,14 @@ public class Recomendacion_Pelicula extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnArbolBianrio1;
+    private javax.swing.JButton btnCatalogo;
+    private javax.swing.JButton btnModelo;
+    private javax.swing.JButton btnRecomendacion;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
     // End of variables declaration//GEN-END:variables
 }
