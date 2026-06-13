@@ -128,7 +128,7 @@ public class Recomendacion_Pelicula extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCatalogoActionPerformed
 
     private void btnArbolBianrio1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnArbolBianrio1ActionPerformed
-        ArbolBinario arbol = new ArbolBinario ();
+        Estadistica arbol = new Estadistica ();
         arbol.setVisible(true);
     }//GEN-LAST:event_btnArbolBianrio1ActionPerformed
 

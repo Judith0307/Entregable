@@ -1,20 +1,58 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package recomendacionpelicula;
 
-/**
- *
- * @author JUDITH
- */
 public class Recomendacion extends javax.swing.JFrame {
+    // ── Lógica del sistema ──
+private ArbolBST arbolPeliculas = new ArbolBST();
+private ArbolDecision motor = new ArbolDecision();
+private java.util.List<Pelicula> catalogo = new java.util.ArrayList<>();
+// ── Cargar catálogo al iniciar ──
+private void cargarCatalogo() {
+    catalogo.add(new Pelicula(1,  "Mad Max: Fury Road",       "Accion",          2015, 8.1, "R"));
+    catalogo.add(new Pelicula(2,  "John Wick",                "Accion",          2014, 7.4, "R"));
+    catalogo.add(new Pelicula(3,  "Top Gun: Maverick",        "Accion",          2022, 8.3, "PG-13"));
+    catalogo.add(new Pelicula(4,  "The Dark Knight",          "Accion",          2008, 9.0, "PG-13"));
+    catalogo.add(new Pelicula(5,  "Mission Impossible",       "Accion",          2023, 7.8, "PG-13"));
+    catalogo.add(new Pelicula(6,  "Superbad",                 "Comedia",         2007, 7.6, "R"));
+    catalogo.add(new Pelicula(7,  "Grand Budapest Hotel",     "Comedia",         2014, 8.1, "R"));
+    catalogo.add(new Pelicula(8,  "Knives Out",               "Comedia",         2019, 7.9, "PG-13"));
+    catalogo.add(new Pelicula(9,  "Paddington 2",             "Comedia",         2017, 7.8, "PG"));
+    catalogo.add(new Pelicula(10, "Shawshank Redemption",     "Drama",           1994, 9.3, "R"));
+    catalogo.add(new Pelicula(11, "Parasite",                 "Drama",           2019, 8.5, "R"));
+    catalogo.add(new Pelicula(12, "Marriage Story",           "Drama",           2019, 7.9, "R"));
+    catalogo.add(new Pelicula(13, "Hereditary",               "Terror",          2018, 7.3, "R"));
+    catalogo.add(new Pelicula(14, "Get Out",                  "Terror",          2017, 7.7, "R"));
+    catalogo.add(new Pelicula(15, "A Quiet Place",            "Terror",          2018, 7.5, "PG-13"));
+    catalogo.add(new Pelicula(16, "Interstellar",             "Ciencia Ficcion", 2014, 8.7, "PG-13"));
+    catalogo.add(new Pelicula(17, "Arrival",                  "Ciencia Ficcion", 2016, 7.9, "PG-13"));
+    catalogo.add(new Pelicula(18, "The Martian",              "Ciencia Ficcion", 2015, 8.0, "PG-13"));
+    catalogo.add(new Pelicula(19, "Spirited Away",            "Animacion",       2001, 8.6, "PG"));
+    catalogo.add(new Pelicula(20, "Coco",                     "Animacion",       2017, 8.4, "PG"));
+    catalogo.add(new Pelicula(21, "Spider-Man Spider-Verse",  "Animacion",       2018, 8.4, "PG"));
+    catalogo.add(new Pelicula(22, "WALL-E",                   "Animacion",       2008, 8.4, "G"));
+    catalogo.add(new Pelicula(23, "La La Land",               "Romance",         2016, 8.0, "PG-13"));
+    catalogo.add(new Pelicula(24, "Eternal Sunshine",         "Romance",         2004, 8.3, "R"));
+    catalogo.add(new Pelicula(25, "Planet Earth II",          "Documental",      2016, 9.5, "G"));
+    catalogo.add(new Pelicula(26, "Free Solo",                "Documental",      2018, 8.2, "PG-13"));
+    catalogo.add(new Pelicula(27, "13th",                     "Documental",      2016, 8.2, "PG-13"));
 
-    /**
-     * Creates new form Recomendacion
-     */
+    // Insertar todas en el árbol BST (ordenado por rating)
+    for (Pelicula p : catalogo) {
+        arbolPeliculas.insertar(p);
+    }
+}
     public Recomendacion() {
         initComponents();
+        cargarCatalogo();
+    // Llenar el combo de géneros
+    CBoxGenero.addItem("Accion");
+    CBoxGenero.addItem("Comedia");
+    CBoxGenero.addItem("Drama");
+    CBoxGenero.addItem("Terror");
+    CBoxGenero.addItem("Ciencia Ficcion");
+    CBoxGenero.addItem("Animacion");
+    CBoxGenero.addItem("Romance");
+    CBoxGenero.addItem("Documental");
     }
 
     /**
@@ -73,12 +111,22 @@ public class Recomendacion extends javax.swing.JFrame {
         btnlimpiar.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
         btnlimpiar.setForeground(new java.awt.Color(255, 255, 255));
         btnlimpiar.setText("Limpiar");
+        btnlimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnlimpiarActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnlimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 140, 260, 50));
 
         btnGenerar.setBackground(new java.awt.Color(204, 0, 0));
         btnGenerar.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
         btnGenerar.setForeground(new java.awt.Color(255, 255, 255));
         btnGenerar.setText("Generar Recomendacion");
+        btnGenerar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGenerarActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnGenerar, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 70, 260, 50));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -98,6 +146,68 @@ public class Recomendacion extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnGenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarActionPerformed
+        String nombre = txtNombre.getText().trim();
+String edadStr = txtEdad.getText().trim();
+String genero = CBoxGenero.getSelectedItem().toString();
+
+// Validaciones
+if (nombre.isEmpty()) {
+    javax.swing.JOptionPane.showMessageDialog(this, "Ingresa tu nombre.", "Campo requerido", javax.swing.JOptionPane.WARNING_MESSAGE);
+    return;
+}
+int edad;
+try {
+    edad = Integer.parseInt(edadStr);
+    if (edad < 5 || edad > 99) throw new NumberFormatException();
+} catch (NumberFormatException e) {
+    javax.swing.JOptionPane.showMessageDialog(this, "Ingresa una edad válida (5-99).", "Edad inválida", javax.swing.JOptionPane.WARNING_MESSAGE);
+    return;
+}
+
+// Crear perfil y recomendar con árbol de decisión
+ArbolDecision.PerfilUsuario perfil = new ArbolDecision.PerfilUsuario(nombre, edad, genero, 6.0, 1990);
+java.util.List<Pelicula> recomendadas = motor.recomendar(catalogo, perfil);
+
+// Mostrar en jPanel2 con una JTextArea dinámica
+jPanel2.removeAll();
+if (recomendadas.isEmpty()) {
+    javax.swing.JLabel lbl = new javax.swing.JLabel("No hay películas para tu perfil. Prueba otro género.");
+    lbl.setForeground(java.awt.Color.WHITE);
+    lbl.setFont(new java.awt.Font("Segoe UI", 0, 13));
+    jPanel2.add(lbl);
+} else {
+    javax.swing.JTextArea area = new javax.swing.JTextArea();
+    area.setEditable(false);
+    area.setBackground(new java.awt.Color(40, 38, 38));
+    area.setForeground(java.awt.Color.WHITE);
+    area.setFont(new java.awt.Font("Segoe UI", 0, 13));
+    area.setMargin(new java.awt.Insets(10,10,10,10));
+    StringBuilder sb = new StringBuilder();
+    sb.append("=== RECOMENDACIONES PARA ").append(nombre.toUpperCase()).append(" (").append(edad).append(" años) ===\n");
+    sb.append("Género: ").append(genero).append(" | Total: ").append(recomendadas.size()).append(" películas\n");
+    sb.append("─────────────────────────────────────────\n");
+    for (int i = 0; i < recomendadas.size(); i++) {
+        sb.append((i+1)).append(". ").append(recomendadas.get(i).toResumen()).append("\n");
+    }
+    area.setText(sb.toString());
+    javax.swing.JScrollPane scroll = new javax.swing.JScrollPane(area);
+    scroll.setSize(780, 255);
+    jPanel2.add(scroll);
+}
+jPanel2.revalidate();
+jPanel2.repaint();
+    }//GEN-LAST:event_btnGenerarActionPerformed
+
+    private void btnlimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnlimpiarActionPerformed
+        txtNombre.setText("");
+txtEdad.setText("");
+CBoxGenero.setSelectedIndex(0);
+jPanel2.removeAll();
+jPanel2.revalidate();
+jPanel2.repaint();
+    }//GEN-LAST:event_btnlimpiarActionPerformed
 
     /**
      * @param args the command line arguments

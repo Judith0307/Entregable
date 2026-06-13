@@ -1,20 +1,66 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package recomendacionpelicula;
 
-/**
- *
- * @author JUDITH
- */
 public class Catalogo extends javax.swing.JFrame {
+    private java.util.List<Pelicula> catalogo = new java.util.ArrayList<>();
 
-    /**
-     * Creates new form Catalogo
-     */
+private void cargarCatalogo() {
+    catalogo.add(new Pelicula(1,  "Mad Max: Fury Road",       "Accion",          2015, 8.1, "R"));
+    catalogo.add(new Pelicula(2,  "The Dark Knight",          "Accion",          2008, 9.0, "PG-13"));
+    catalogo.add(new Pelicula(3,  "Top Gun: Maverick",        "Accion",          2022, 8.3, "PG-13"));
+    catalogo.add(new Pelicula(4,  "John Wick",                "Accion",          2014, 7.4, "R"));
+    catalogo.add(new Pelicula(5,  "Superbad",                 "Comedia",         2007, 7.6, "R"));
+    catalogo.add(new Pelicula(6,  "Knives Out",               "Comedia",         2019, 7.9, "PG-13"));
+    catalogo.add(new Pelicula(7,  "Paddington 2",             "Comedia",         2017, 7.8, "PG"));
+    catalogo.add(new Pelicula(8,  "Shawshank Redemption",     "Drama",           1994, 9.3, "R"));
+    catalogo.add(new Pelicula(9,  "Parasite",                 "Drama",           2019, 8.5, "R"));
+    catalogo.add(new Pelicula(10, "Marriage Story",           "Drama",           2019, 7.9, "R"));
+    catalogo.add(new Pelicula(11, "Hereditary",               "Terror",          2018, 7.3, "R"));
+    catalogo.add(new Pelicula(12, "Get Out",                  "Terror",          2017, 7.7, "R"));
+    catalogo.add(new Pelicula(13, "A Quiet Place",            "Terror",          2018, 7.5, "PG-13"));
+    catalogo.add(new Pelicula(14, "Interstellar",             "Ciencia Ficcion", 2014, 8.7, "PG-13"));
+    catalogo.add(new Pelicula(15, "Arrival",                  "Ciencia Ficcion", 2016, 7.9, "PG-13"));
+    catalogo.add(new Pelicula(16, "Spirited Away",            "Animacion",       2001, 8.6, "PG"));
+    catalogo.add(new Pelicula(17, "Coco",                     "Animacion",       2017, 8.4, "PG"));
+    catalogo.add(new Pelicula(18, "Spider-Man Spider-Verse",  "Animacion",       2018, 8.4, "PG"));
+    catalogo.add(new Pelicula(19, "WALL-E",                   "Animacion",       2008, 8.4, "G"));
+    catalogo.add(new Pelicula(20, "La La Land",               "Romance",         2016, 8.0, "PG-13"));
+    catalogo.add(new Pelicula(21, "Eternal Sunshine",         "Romance",         2004, 8.3, "R"));
+    catalogo.add(new Pelicula(22, "Planet Earth II",          "Documental",      2016, 9.5, "G"));
+    catalogo.add(new Pelicula(23, "Free Solo",                "Documental",      2018, 8.2, "PG-13"));
+    catalogo.add(new Pelicula(24, "13th",                     "Documental",      2016, 8.2, "PG-13"));
+}
+
+// Muestra las películas del género en jPanel3
+private void mostrarGenero(String genero) {
+    jPanel3.removeAll();
+    jPanel3.setBackground(new java.awt.Color(27,25,25));
+    jPanel3.setLayout(new java.awt.BorderLayout());
+
+    javax.swing.JTextArea area = new javax.swing.JTextArea();
+    area.setEditable(false);
+    area.setBackground(new java.awt.Color(40,38,38));
+    area.setForeground(java.awt.Color.WHITE);
+    area.setFont(new java.awt.Font("Segoe UI", 0, 13));
+    area.setMargin(new java.awt.Insets(10,10,10,10));
+
+    StringBuilder sb = new StringBuilder();
+    sb.append("══ ").append(genero.toUpperCase()).append(" ══\n\n");
+    int n = 1;
+    for (Pelicula p : catalogo) {
+        if (p.getGenero().equalsIgnoreCase(genero)) {
+            sb.append(n++).append(". ").append(p.toResumen()).append("\n");
+        }
+    }
+    if (n == 1) sb.append("No hay películas en este género.");
+    area.setText(sb.toString());
+
+    jPanel3.add(new javax.swing.JScrollPane(area), java.awt.BorderLayout.CENTER);
+    jPanel3.revalidate();
+    jPanel3.repaint();
+}
     public Catalogo() {
         initComponents();
+        cargarCatalogo();
     }
 
     /**
@@ -67,48 +113,88 @@ public class Catalogo extends javax.swing.JFrame {
         btnDrama.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
         btnDrama.setForeground(new java.awt.Color(255, 255, 255));
         btnDrama.setText("Drama");
+        btnDrama.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDramaActionPerformed(evt);
+            }
+        });
         jPanel2.add(btnDrama, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 150, 50));
 
         btnCienciaFiccion.setBackground(new java.awt.Color(204, 0, 0));
         btnCienciaFiccion.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
         btnCienciaFiccion.setForeground(new java.awt.Color(255, 255, 255));
         btnCienciaFiccion.setText("Ciencia Ficcion");
+        btnCienciaFiccion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCienciaFiccionActionPerformed(evt);
+            }
+        });
         jPanel2.add(btnCienciaFiccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 150, 50));
 
         btnRomance.setBackground(new java.awt.Color(204, 0, 0));
         btnRomance.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
         btnRomance.setForeground(new java.awt.Color(255, 255, 255));
         btnRomance.setText("Romance");
+        btnRomance.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRomanceActionPerformed(evt);
+            }
+        });
         jPanel2.add(btnRomance, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, 150, 50));
 
         btnComedia.setBackground(new java.awt.Color(204, 0, 0));
         btnComedia.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
         btnComedia.setForeground(new java.awt.Color(255, 255, 255));
         btnComedia.setText("Comedia");
+        btnComedia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnComediaActionPerformed(evt);
+            }
+        });
         jPanel2.add(btnComedia, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, 150, 50));
 
         btnAnimacion.setBackground(new java.awt.Color(204, 0, 0));
         btnAnimacion.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
         btnAnimacion.setForeground(new java.awt.Color(255, 255, 255));
         btnAnimacion.setText("Animacion");
+        btnAnimacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAnimacionActionPerformed(evt);
+            }
+        });
         jPanel2.add(btnAnimacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 380, 150, 50));
 
         btnAccion.setBackground(new java.awt.Color(204, 0, 0));
         btnAccion.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
         btnAccion.setForeground(new java.awt.Color(255, 255, 255));
         btnAccion.setText("Acción");
+        btnAccion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAccionActionPerformed(evt);
+            }
+        });
         jPanel2.add(btnAccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 150, 50));
 
         btnDocumentacion.setBackground(new java.awt.Color(204, 0, 0));
         btnDocumentacion.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
         btnDocumentacion.setForeground(new java.awt.Color(255, 255, 255));
         btnDocumentacion.setText("Documentacion");
+        btnDocumentacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDocumentacionActionPerformed(evt);
+            }
+        });
         jPanel2.add(btnDocumentacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 440, 150, 50));
 
         btnTerror.setBackground(new java.awt.Color(204, 0, 0));
         btnTerror.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
         btnTerror.setForeground(new java.awt.Color(255, 255, 255));
         btnTerror.setText("Terror");
+        btnTerror.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTerrorActionPerformed(evt);
+            }
+        });
         jPanel2.add(btnTerror, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 320, 150, 50));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -128,6 +214,38 @@ public class Catalogo extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnAccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAccionActionPerformed
+        mostrarGenero("Accion");
+    }//GEN-LAST:event_btnAccionActionPerformed
+
+    private void btnDramaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDramaActionPerformed
+        mostrarGenero("Drama");
+    }//GEN-LAST:event_btnDramaActionPerformed
+
+    private void btnCienciaFiccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCienciaFiccionActionPerformed
+        mostrarGenero("Ciencia Ficcion");
+    }//GEN-LAST:event_btnCienciaFiccionActionPerformed
+
+    private void btnRomanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRomanceActionPerformed
+        mostrarGenero("Romance");
+    }//GEN-LAST:event_btnRomanceActionPerformed
+
+    private void btnComediaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComediaActionPerformed
+       mostrarGenero("Comedia");
+    }//GEN-LAST:event_btnComediaActionPerformed
+
+    private void btnTerrorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTerrorActionPerformed
+        mostrarGenero("Terror");
+    }//GEN-LAST:event_btnTerrorActionPerformed
+
+    private void btnAnimacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnimacionActionPerformed
+        mostrarGenero("Animacion");
+    }//GEN-LAST:event_btnAnimacionActionPerformed
+
+    private void btnDocumentacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDocumentacionActionPerformed
+        mostrarGenero("Documental");
+    }//GEN-LAST:event_btnDocumentacionActionPerformed
 
     /**
      * @param args the command line arguments
