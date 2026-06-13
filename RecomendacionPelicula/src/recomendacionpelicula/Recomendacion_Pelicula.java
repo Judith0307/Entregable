@@ -52,18 +52,33 @@ public class Recomendacion_Pelicula extends javax.swing.JFrame {
         btnCatalogo.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnCatalogo.setForeground(new java.awt.Color(255, 255, 255));
         btnCatalogo.setText("Catalogo");
+        btnCatalogo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCatalogoActionPerformed(evt);
+            }
+        });
         jPanel2.add(btnCatalogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 170, 180, 50));
 
         btnModelo.setBackground(new java.awt.Color(204, 0, 0));
         btnModelo.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnModelo.setForeground(new java.awt.Color(255, 255, 255));
         btnModelo.setText("Modelo IA");
+        btnModelo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModeloActionPerformed(evt);
+            }
+        });
         jPanel2.add(btnModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 270, 180, 50));
 
         btnRecomendacion.setBackground(new java.awt.Color(204, 0, 0));
         btnRecomendacion.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnRecomendacion.setForeground(new java.awt.Color(255, 255, 255));
         btnRecomendacion.setText("Recomendaciones");
+        btnRecomendacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRecomendacionActionPerformed(evt);
+            }
+        });
         jPanel2.add(btnRecomendacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 180, 50));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 30)); // NOI18N
@@ -75,6 +90,11 @@ public class Recomendacion_Pelicula extends javax.swing.JFrame {
         btnArbolBianrio1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnArbolBianrio1.setForeground(new java.awt.Color(255, 255, 255));
         btnArbolBianrio1.setText("Arbol Binario");
+        btnArbolBianrio1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnArbolBianrio1ActionPerformed(evt);
+            }
+        });
         jPanel2.add(btnArbolBianrio1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 220, 180, 50));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 180, 520));
@@ -96,6 +116,26 @@ public class Recomendacion_Pelicula extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnRecomendacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRecomendacionActionPerformed
+        Recomendacion nuevaVentana = new Recomendacion ();
+        nuevaVentana.setVisible(true);
+    }//GEN-LAST:event_btnRecomendacionActionPerformed
+
+    private void btnCatalogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCatalogoActionPerformed
+        Catalogo catalogo = new Catalogo ();
+        catalogo.setVisible(true);
+    }//GEN-LAST:event_btnCatalogoActionPerformed
+
+    private void btnArbolBianrio1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnArbolBianrio1ActionPerformed
+        ArbolBinario arbol = new ArbolBinario ();
+        arbol.setVisible(true);
+    }//GEN-LAST:event_btnArbolBianrio1ActionPerformed
+
+    private void btnModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModeloActionPerformed
+       ModeloIA modelo = new ModeloIA ();
+        modelo.setVisible(true);
+    }//GEN-LAST:event_btnModeloActionPerformed
 
     /**
      * @param args the command line arguments

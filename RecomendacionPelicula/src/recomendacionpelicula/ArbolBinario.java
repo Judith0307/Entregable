@@ -41,7 +41,7 @@ public class ArbolBinario extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         btnInsertar2 = new javax.swing.JButton();
-        btnInsertar5 = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -115,11 +115,11 @@ public class ArbolBinario extends javax.swing.JFrame {
         btnInsertar2.setText("Insertar");
         jPanel2.add(btnInsertar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 20, 150, 30));
 
-        btnInsertar5.setBackground(new java.awt.Color(204, 0, 0));
-        btnInsertar5.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
-        btnInsertar5.setForeground(new java.awt.Color(255, 255, 255));
-        btnInsertar5.setText("Eliminar");
-        jPanel2.add(btnInsertar5, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 60, 150, 30));
+        btnEliminar.setBackground(new java.awt.Color(204, 0, 0));
+        btnEliminar.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
+        btnEliminar.setForeground(new java.awt.Color(255, 255, 255));
+        btnEliminar.setText("Eliminar");
+        jPanel2.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 60, 150, 30));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 870, 520));
 
@@ -167,11 +167,11 @@ public class ArbolBinario extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnInsertar1;
     private javax.swing.JButton btnInsertar2;
     private javax.swing.JButton btnInsertar3;
     private javax.swing.JButton btnInsertar4;
-    private javax.swing.JButton btnInsertar5;
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
