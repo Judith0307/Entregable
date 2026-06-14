@@ -1,9 +1,9 @@
 package recomendacionpelicula;
+
 /**
- * Descripción: Árbol Binario de Búsqueda ordenado por RATING
- *              Implementamos recursividad en todos sus métodos
- *              - Menor rating → izquierda
- *              - Mayor rating → derecha
+ * Árbol Binario de Búsqueda ordenado por ID (único por película).
+ * El ID garantiza que no haya colisiones, a diferencia del rating.
+ * El rating se usa solo para análisis estadístico (top 10).
  */
 
 import java.util.ArrayList;
@@ -16,55 +16,56 @@ public class ArbolBST {
 
     // CONSTRUCTOR
     public ArbolBST() {
-        this.raiz = null; // Árbol vacío al inicio
+        this.raiz = null;
     }
 
-    // INSERTAR película en el árbol
+    // ─────────────────────────────────────────────────────────
+    // INSERTAR — ordenado por ID (garantiza nodos únicos)
+    // ─────────────────────────────────────────────────────────
     public void insertar(Pelicula pelicula) {
         raiz = insertarRecursivo(raiz, pelicula);
     }
 
-    // Método recursivo privado para insertar
     private Nodo insertarRecursivo(Nodo nodoActual, Pelicula pelicula) {
-        // CASO BASE: si el nodo está vacío, crear nuevo nodo aquí
-        if (nodoActual == null) {
-            return new Nodo(pelicula);
-        }
-
-        // Si el rating es MENOR → insertar a la IZQUIERDA
-        if (pelicula.getRating() < nodoActual.pelicula.getRating()) {
-            nodoActual.izquierdo = insertarRecursivo(nodoActual.izquierdo, pelicula);
-        }
-        // Si el rating es MAYOR → insertar a la DERECHA
-        else if (pelicula.getRating() > nodoActual.pelicula.getRating()) {
-            nodoActual.derecho = insertarRecursivo(nodoActual.derecho, pelicula);
-        }
-        // Si el rating es IGUAL → insertar a la derecha igual
-        else {
-            nodoActual.derecho = insertarRecursivo(nodoActual.derecho, pelicula);
-        }
-
-        return nodoActual;
+    // CASO BASE: posición vacía → crear nodo
+    if (nodoActual == null) {
+        return new Nodo(pelicula);
     }
 
-    // BUSCAR película por título (recursivo)
+    // Comparar títulos alfabéticamente
+    int comparacion = pelicula.getTitulo().compareToIgnoreCase(nodoActual.pelicula.getTitulo());
+
+    if (comparacion < 0) {
+        // Título menor alfabéticamente → izquierda
+        nodoActual.izquierdo = insertarRecursivo(nodoActual.izquierdo, pelicula);
+    } else if (comparacion > 0) {
+        // Título mayor alfabéticamente → derecha
+        nodoActual.derecho = insertarRecursivo(nodoActual.derecho, pelicula);
+    }
+    // Título igual → ignorar (película duplicada)
+
+    return nodoActual;
+}
+
+    // ─────────────────────────────────────────────────────────
+    // BUSCAR por título (recorre todo el árbol)
+    // ─────────────────────────────────────────────────────────
     public Pelicula buscarPorTitulo(String titulo) {
         return buscarRecursivo(raiz, titulo);
     }
 
     private Pelicula buscarRecursivo(Nodo nodo, String titulo) {
-        // CASO BASE: nodo vacío o título encontrado
         if (nodo == null) return null;
         if (nodo.pelicula.getTitulo().equalsIgnoreCase(titulo)) return nodo.pelicula;
 
-        // Buscar en ambos subárboles
         Pelicula encontrada = buscarRecursivo(nodo.izquierdo, titulo);
         if (encontrada != null) return encontrada;
         return buscarRecursivo(nodo.derecho, titulo);
     }
 
-    // RECORRIDO INORDEN: Izquierda → Raíz → Derecha
-    // Resultado: películas ordenadas de MENOR a MAYOR rating
+    // ─────────────────────────────────────────────────────────
+    // INORDEN: Izquierda → Raíz → Derecha  (películas por ID ascendente)
+    // ─────────────────────────────────────────────────────────
     public List<Pelicula> inorden() {
         List<Pelicula> lista = new ArrayList<>();
         inordenRecursivo(raiz, lista);
@@ -73,14 +74,15 @@ public class ArbolBST {
 
     private void inordenRecursivo(Nodo nodo, List<Pelicula> lista) {
         if (nodo != null) {
-            inordenRecursivo(nodo.izquierdo, lista);  // 1. Visitar izquierda
-            lista.add(nodo.pelicula);                  // 2. Procesar raíz
-            inordenRecursivo(nodo.derecho, lista);     // 3. Visitar derecha
+            inordenRecursivo(nodo.izquierdo, lista);
+            lista.add(nodo.pelicula);
+            inordenRecursivo(nodo.derecho, lista);
         }
     }
 
-    // RECORRIDO PREORDEN: Raíz → Izquierda → Derecha
-    // Resultado: útil para guardar/exportar el árbol
+    // ─────────────────────────────────────────────────────────
+    // PREORDEN: Raíz → Izquierda → Derecha
+    // ─────────────────────────────────────────────────────────
     public List<Pelicula> preorden() {
         List<Pelicula> lista = new ArrayList<>();
         preordenRecursivo(raiz, lista);
@@ -89,14 +91,15 @@ public class ArbolBST {
 
     private void preordenRecursivo(Nodo nodo, List<Pelicula> lista) {
         if (nodo != null) {
-            lista.add(nodo.pelicula);                   // 1. Procesar raíz
-            preordenRecursivo(nodo.izquierdo, lista);   // 2. Visitar izquierda
-            preordenRecursivo(nodo.derecho, lista);     // 3. Visitar derecha
+            lista.add(nodo.pelicula);
+            preordenRecursivo(nodo.izquierdo, lista);
+            preordenRecursivo(nodo.derecho, lista);
         }
     }
 
-    // RECORRIDO POSTORDEN: Izquierda → Derecha → Raíz
-    // Resultado: útil para calcular promedios por rama
+    // ─────────────────────────────────────────────────────────
+    // POSTORDEN: Izquierda → Derecha → Raíz
+    // ─────────────────────────────────────────────────────────
     public List<Pelicula> postorden() {
         List<Pelicula> lista = new ArrayList<>();
         postordenRecursivo(raiz, lista);
@@ -105,25 +108,59 @@ public class ArbolBST {
 
     private void postordenRecursivo(Nodo nodo, List<Pelicula> lista) {
         if (nodo != null) {
-            postordenRecursivo(nodo.izquierdo, lista);  // 1. Visitar izquierda
-            postordenRecursivo(nodo.derecho, lista);    // 2. Visitar derecha
-            lista.add(nodo.pelicula);                   // 3. Procesar raíz
+            postordenRecursivo(nodo.izquierdo, lista);
+            postordenRecursivo(nodo.derecho, lista);
+            lista.add(nodo.pelicula);
         }
     }
 
-    // ALTURA del árbol (recursivo)
+    // ─────────────────────────────────────────────────────────
+    // TOP 10 POR RATING — usa inorden (que da todas las películas)
+    // y luego ordena por rating de mayor a menor, retorna máx. 10.
+    // Toda la lógica es recursiva internamente (vía inorden).
+    // ─────────────────────────────────────────────────────────
+    public List<Pelicula> top10PorRating() {
+        // 1. Obtenemos todas las películas via inorden (recursivo)
+        List<Pelicula> todas = inorden();
+
+        // 2. Ordenamos por rating descendente (burbuja recursiva)
+        ordenarPorRatingDesc(todas, todas.size());
+
+        // 3. Retornamos máximo 10
+        int limite = Math.min(10, todas.size());
+        return todas.subList(0, limite);
+    }
+
+    // Ordenamiento burbuja recursivo por rating descendente
+    private void ordenarPorRatingDesc(List<Pelicula> lista, int n) {
+        // CASO BASE: un solo elemento ya está ordenado
+        if (n <= 1) return;
+
+        // Una pasada de burbuja: mueve el menor al final
+        for (int i = 0; i < n - 1; i++) {
+            if (lista.get(i).getRating() < lista.get(i + 1).getRating()) {
+                Pelicula temp = lista.get(i);
+                lista.set(i, lista.get(i + 1));
+                lista.set(i + 1, temp);
+            }
+        }
+
+        // Llamada recursiva ignorando el último (ya está en su lugar)
+        ordenarPorRatingDesc(lista, n - 1);
+    }
+
+    // ─────────────────────────────────────────────────────────
+    // UTILIDADES
+    // ─────────────────────────────────────────────────────────
     public int altura() {
         return alturaRecursiva(raiz);
     }
 
     private int alturaRecursiva(Nodo nodo) {
         if (nodo == null) return 0;
-        int altIzq = alturaRecursiva(nodo.izquierdo);
-        int altDer = alturaRecursiva(nodo.derecho);
-        return 1 + Math.max(altIzq, altDer);
+        return 1 + Math.max(alturaRecursiva(nodo.izquierdo), alturaRecursiva(nodo.derecho));
     }
 
-    // CONTAR nodos (recursivo)
     public int contarNodos() {
         return contarRecursivo(raiz);
     }
@@ -133,12 +170,10 @@ public class ArbolBST {
         return 1 + contarRecursivo(nodo.izquierdo) + contarRecursivo(nodo.derecho);
     }
 
-    // OBTENER RAÍZ (para dibujar el árbol en la interfaz)
     public Nodo getRaiz() {
         return raiz;
     }
 
-    // VERIFICAR si el árbol está vacío
     public boolean estaVacio() {
         return raiz == null;
     }

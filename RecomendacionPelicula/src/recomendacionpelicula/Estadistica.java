@@ -2,26 +2,26 @@ package recomendacionpelicula;
 
 public class Estadistica extends javax.swing.JFrame {
 
-private ArbolBST arbol = new ArbolBST();
-private int idContador = 100;
+    private ArbolBST arbol = new ArbolBST();
+    private int idContador = 100;  // IDs para nuevas películas insertadas
 
 // Cargar películas base en el árbol
-private void cargarArbolInicial() {
-    arbol.insertar(new Pelicula(1,  "The Dark Knight",      "Accion",    2008, 9.0, "PG-13"));
-    arbol.insertar(new Pelicula(2,  "Spirited Away",        "Animacion", 2001, 8.6, "PG"));
-    arbol.insertar(new Pelicula(3,  "Interstellar",         "Sci-Fi",    2014, 8.7, "PG-13"));
-    arbol.insertar(new Pelicula(4,  "Shawshank Redemption", "Drama",     1994, 9.3, "R"));
-    arbol.insertar(new Pelicula(5,  "Parasite",             "Drama",     2019, 8.5, "R"));
-    arbol.insertar(new Pelicula(6,  "Top Gun: Maverick",    "Accion",    2022, 8.3, "PG-13"));
-    arbol.insertar(new Pelicula(7,  "John Wick",            "Accion",    2014, 7.4, "R"));
-    dibujarArbol();
-    mostrarRecorrido("IN");
-}
+    private void cargarArbolInicial() {
+        arbol.insertar(new Pelicula(1, "The Dark Knight", "Accion", 2008, 9.0, "PG-13"));
+        arbol.insertar(new Pelicula(2, "Spirited Away", "Animacion", 2001, 8.6, "PG"));
+        arbol.insertar(new Pelicula(3, "Interstellar", "Sci-Fi", 2014, 8.7, "PG-13"));
+        arbol.insertar(new Pelicula(4, "Shawshank Redemption", "Drama", 1994, 9.3, "R"));
+        arbol.insertar(new Pelicula(5, "Parasite", "Drama", 2019, 8.5, "R"));
+        arbol.insertar(new Pelicula(6, "Top Gun: Maverick", "Accion", 2022, 8.3, "PG-13"));
+        arbol.insertar(new Pelicula(7, "John Wick", "Accion", 2014, 7.4, "R"));
+        dibujarArbol();
+        mostrarRecorrido("IN");
+    }
+
     public Estadistica() {
         initComponents();
-    cargarArbolInicial();
-}
-    
+        cargarArbolInicial();
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -168,20 +168,29 @@ private void cargarArbolInicial() {
 
     private void btnInsertar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertar2ActionPerformed
         String titulo = jTextField2.getText().trim();
-String genero = jTextField1.getText().trim();
-if (titulo.isEmpty() || genero.isEmpty()) {
-    javax.swing.JOptionPane.showMessageDialog(this, "Completa Título y Género.", "Campos requeridos", javax.swing.JOptionPane.WARNING_MESSAGE);
-    return;
-}
-// Rating aleatorio entre 6.0 y 9.5 para demo
-double rating = 6.0 + Math.round(Math.random() * 35) / 10.0;
-Pelicula nueva = new Pelicula(++idContador, titulo, genero, 2024, rating, "PG-13");
-arbol.insertar(nueva);
-dibujarArbol();
-mostrarRecorrido("IN");
-jTextField2.setText("");
-jTextField1.setText("");
-javax.swing.JOptionPane.showMessageDialog(this, "\"" + titulo + "\" insertada con rating " + rating, "Insertada", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        String genero = jTextField1.getText().trim();
+
+        if (titulo.isEmpty() || genero.isEmpty()) {
+            javax.swing.JOptionPane.showMessageDialog(this,
+                    "Completa Título y Género.", "Campos requeridos",
+                    javax.swing.JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        // Rating aleatorio entre 6.0 y 9.5 para demo
+        double rating = Math.round((6.0 + Math.random() * 3.5) * 10.0) / 10.0;
+
+        // ID único incremental — garantiza posición única en el árbol
+        Pelicula nueva = new Pelicula(++idContador, titulo, genero, 2024, rating, "PG-13");
+        arbol.insertar(nueva);
+        dibujarArbol();
+        mostrarRecorrido("IN");  // Actualiza top 10 tras insertar
+
+        jTextField2.setText("");
+        jTextField1.setText("");
+        javax.swing.JOptionPane.showMessageDialog(this,
+                "\"" + titulo + "\" insertada con rating ★" + rating,
+                "Insertada", javax.swing.JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_btnInsertar2ActionPerformed
 
     private void btnInsertar4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertar4ActionPerformed
@@ -198,22 +207,22 @@ javax.swing.JOptionPane.showMessageDialog(this, "\"" + titulo + "\" insertada co
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         String titulo = jTextField2.getText().trim();
-if (titulo.isEmpty()) {
-    javax.swing.JOptionPane.showMessageDialog(this, "Escribe el título a eliminar en el campo Título.", "Campo requerido", javax.swing.JOptionPane.WARNING_MESSAGE);
-    return;
-}
-Pelicula encontrada = arbol.buscarPorTitulo(titulo);
-if (encontrada == null) {
-    javax.swing.JOptionPane.showMessageDialog(this, "No se encontró: " + titulo, "No encontrado", javax.swing.JOptionPane.WARNING_MESSAGE);
-} else {
-    javax.swing.JOptionPane.showMessageDialog(this, "Eliminación visual completada para: " + titulo + "\n(En BST la eliminación se refleja en el recorrido)", "Eliminado", javax.swing.JOptionPane.INFORMATION_MESSAGE);
-    jTextField2.setText("");
-}
+        if (titulo.isEmpty()) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Escribe el título a eliminar en el campo Título.", "Campo requerido", javax.swing.JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        Pelicula encontrada = arbol.buscarPorTitulo(titulo);
+        if (encontrada == null) {
+            javax.swing.JOptionPane.showMessageDialog(this, "No se encontró: " + titulo, "No encontrado", javax.swing.JOptionPane.WARNING_MESSAGE);
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(this, "Eliminación visual completada para: " + titulo + "\n(En BST la eliminación se refleja en el recorrido)", "Eliminado", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            jTextField2.setText("");
+        }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
         arbol = new ArbolBST();
-        
+
         // 2. Limpiamos las cajas de texto de la interfaz
         jTextField2.setText(""); // Limpia la caja del Título
         jTextField1.setText(""); // Limpia la caja del Género
@@ -221,73 +230,117 @@ if (encontrada == null) {
 
         dibujarArbol();
     }//GEN-LAST:event_btnLimpiarActionPerformed
+// ─────────────────────────────────────────────────────────
 // Muestra el recorrido en txtrecorrido
-private void mostrarRecorrido(String tipo) {
-    java.util.List<Pelicula> lista;
-    String label;
-    switch (tipo) {
-        case "PRE":  lista = arbol.preorden();   label = "PREORDEN: ";  break;
-        case "POST": lista = arbol.postorden();  label = "POSTORDEN: "; break;
-        default:     lista = arbol.inorden();    label = "INORDEN: ";   break;
-    }
-    StringBuilder sb = new StringBuilder(label);
-    for (int i = 0; i < lista.size(); i++) {
-        sb.append(lista.get(i).getTitulo()).append(" (").append(lista.get(i).getRating()).append(")");
-        if (i < lista.size()-1) sb.append(" → ");
-    }
-    txtrecorrido.setText(sb.toString());
-}
+// InOrden especial: muestra Top 10 por rating (mayor a menor)
+// ─────────────────────────────────────────────────────────
 
-// Dibuja el árbol en jPanel1 usando Canvas
-private void dibujarArbol() {
+    private void mostrarRecorrido(String tipo) {
+        java.util.List<Pelicula> lista;
+        String label;
+
+        switch (tipo) {
+            case "PRE":
+                lista = arbol.preorden();
+                label = "PREORDEN (por ID): ";
+                break;
+            case "POST":
+                lista = arbol.postorden();
+                label = "POSTORDEN (por ID): ";
+                break;
+            default: // "IN" → Top 10 por rating
+                lista = arbol.top10PorRating();
+                label = "TOP 10 MEJOR RATING: ";
+                break;
+        }
+
+        StringBuilder sb = new StringBuilder(label);
+        for (int i = 0; i < lista.size(); i++) {
+            Pelicula p = lista.get(i);
+            sb.append(p.getTitulo())
+                    .append(" (★").append(p.getRating()).append(")");
+            if (i < lista.size() - 1) {
+                sb.append(" → ");
+            }
+        }
+        txtrecorrido.setText(sb.toString());
+    }
+
+    private void dibujarArbol() {
     jPanel1.removeAll();
-    jPanel1.setBackground(new java.awt.Color(27,25,25));
+    jPanel1.setBackground(new java.awt.Color(27, 25, 25));
     jPanel1.setLayout(null);
 
-    // Panel de dibujo personalizado
     javax.swing.JPanel canvas = new javax.swing.JPanel() {
         @Override
         protected void paintComponent(java.awt.Graphics g) {
             super.paintComponent(g);
-            setBackground(new java.awt.Color(27,25,25));
+            java.awt.Graphics2D g2 = (java.awt.Graphics2D) g;
+            // Suavizado para que se vea más nítido
+            g2.setRenderingHint(java.awt.RenderingHints.KEY_ANTIALIASING,
+                                java.awt.RenderingHints.VALUE_ANTIALIAS_ON);
+            setBackground(new java.awt.Color(27, 25, 25));
+
             if (!arbol.estaVacio()) {
-                dibujarNodo(g, arbol.getRaiz(), getWidth()/2, 30, getWidth()/4);
+                dibujarNodo(g2, arbol.getRaiz(), getWidth() / 2, 40, getWidth() / 4);
             } else {
-                g.setColor(java.awt.Color.WHITE);
-                g.drawString("Árbol vacío", getWidth()/2 - 40, getHeight()/2);
+                g2.setColor(java.awt.Color.WHITE);
+                g2.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 14));
+                g2.drawString("Árbol vacío", getWidth() / 2 - 45, getHeight() / 2);
             }
         }
-        private void dibujarNodo(java.awt.Graphics g, Nodo nodo, int x, int y, int offset) {
+
+        private void dibujarNodo(java.awt.Graphics2D g, Nodo nodo, int x, int y, int offset) {
             if (nodo == null) return;
-            // Dibujar líneas a hijos
-            g.setColor(new java.awt.Color(200,200,200));
+
+            // ── Líneas hacia los hijos ──
+            g.setColor(new java.awt.Color(150, 150, 150));
+            g.setStroke(new java.awt.BasicStroke(1.5f));
             if (nodo.izquierdo != null) {
-                g.drawLine(x, y+18, x-offset, y+60);
-                dibujarNodo(g, nodo.izquierdo, x-offset, y+60, offset/2);
+                g.drawLine(x, y + 22, x - offset, y + 70);
+                dibujarNodo(g, nodo.izquierdo, x - offset, y + 70, Math.max(offset / 2, 25));
             }
             if (nodo.derecho != null) {
-                g.drawLine(x, y+18, x+offset, y+60);
-                dibujarNodo(g, nodo.derecho, x+offset, y+60, offset/2);
+                g.drawLine(x, y + 22, x + offset, y + 70);
+                dibujarNodo(g, nodo.derecho, x + offset, y + 70, Math.max(offset / 2, 25));
             }
-            // Dibujar círculo del nodo
-            g.setColor(new java.awt.Color(204,0,0));
-            g.fillOval(x-22, y-10, 44, 36);
+
+            // ── Sombra del círculo ──
+            g.setColor(new java.awt.Color(0, 0, 0, 80));
+            g.fillOval(x - 26, y - 6, 52, 52);
+
+            // ── Círculo principal rojo ──
+            g.setColor(new java.awt.Color(204, 0, 0));
+            g.fillOval(x - 25, y - 8, 50, 50);
+
+            // ── Borde del círculo ──
+            g.setColor(new java.awt.Color(255, 80, 80));
+            g.setStroke(new java.awt.BasicStroke(1.5f));
+            g.drawOval(x - 25, y - 8, 50, 50);
+
+            // ── Rating dentro del círculo (grande y claro) ──
             g.setColor(java.awt.Color.WHITE);
-            g.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 10));
-            String rating = String.valueOf(nodo.pelicula.getRating());
-            g.drawString(rating, x - g.getFontMetrics().stringWidth(rating)/2, y+12);
-            // Título corto debajo
-            g.setColor(new java.awt.Color(180,180,180));
-            g.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 9));
-            String corto = nodo.pelicula.getTitulo().length()>10 ? nodo.pelicula.getTitulo().substring(0,10)+"…" : nodo.pelicula.getTitulo();
-            g.drawString(corto, x - g.getFontMetrics().stringWidth(corto)/2, y+32);
+            g.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 12));
+            String rating = nodo.pelicula.getRating() + " pts";
+            int rw = g.getFontMetrics().stringWidth(rating);
+            g.drawString(rating, x - rw / 2, y + 14);
+
+            // ── Título corto debajo del círculo ──
+            g.setColor(new java.awt.Color(200, 200, 200));
+            g.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 10));
+            String titulo = nodo.pelicula.getTitulo();
+            if (titulo.length() > 12) titulo = titulo.substring(0, 11) + "…";
+            int tw = g.getFontMetrics().stringWidth(titulo);
+            g.drawString(titulo, x - tw / 2, y + 55);
         }
     };
+
     canvas.setBounds(0, 0, 790, 250);
     jPanel1.add(canvas);
     jPanel1.revalidate();
     jPanel1.repaint();
 }
+
     /**
      * @param args the command line arguments
      */
@@ -298,21 +351,21 @@ private void dibujarArbol() {
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
         try {
-    for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-        if ("Nimbus".equals(info.getName())) {
-            javax.swing.UIManager.setLookAndFeel(info.getClassName());
-            break;
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(Estadistica.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(Estadistica.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(Estadistica.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(Estadistica.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-    }
-} catch (ClassNotFoundException ex) {
-    java.util.logging.Logger.getLogger(Estadistica.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-} catch (InstantiationException ex) {
-    java.util.logging.Logger.getLogger(Estadistica.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-} catch (IllegalAccessException ex) {
-    java.util.logging.Logger.getLogger(Estadistica.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-} catch (javax.swing.UnsupportedLookAndFeelException ex) {
-    java.util.logging.Logger.getLogger(Estadistica.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-}
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -326,7 +379,6 @@ private void dibujarArbol() {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Estadistica().setVisible(true);
-
 
             }
         });
